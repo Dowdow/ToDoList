@@ -1,0 +1,7 @@
+parameters:
+#    leo_and_leo_to_do_list.example.class: LeoAndLeo\ToDoListBundle\Example
+
+services:
+#    leo_and_leo_to_do_list.example:
+#        class: %leo_and_leo_to_do_list.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
