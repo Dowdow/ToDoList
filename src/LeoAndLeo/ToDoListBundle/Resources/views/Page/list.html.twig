@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}
+
+{%  block body %}
+    <h1>Lists</h1>
+    <p><a href="{{ path('leo_and_leo_to_do_list.list_list_add') }}">Add a list</a></p>
+    <ul>
+        {% for list in lists %}
+            <li><a href="{{ path('leo_and_leo_to_do_list.list_list_id', { 'id': list.id }) }}">{{ list.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

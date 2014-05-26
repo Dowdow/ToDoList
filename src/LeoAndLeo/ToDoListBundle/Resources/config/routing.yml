@@ -1,3 +1,17 @@
-leo_and_leo_to_do_list.homepage:
-    pattern:  /list
+leo_and_leo_to_do_list.list_index:
+    pattern:  /
     defaults: { _controller: LeoAndLeoToDoListBundle:List:index }
+
+leo_and_leo_to_do_list.list_list:
+    pattern:  /list
+    defaults: { _controller: LeoAndLeoToDoListBundle:List:list }
+
+leo_and_leo_to_do_list.list_list_add:
+    pattern:  /list/add
+    defaults: { _controller: LeoAndLeoToDoListBundle:List:listadd }
+
+leo_and_leo_to_do_list.list_list_id:
+    pattern:  /list/{id}
+    defaults: { _controller: LeoAndLeoToDoListBundle:List:listid }
+    requirements:
+        id: \d+
