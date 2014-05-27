@@ -3,6 +3,8 @@
 {%  block body %}
     <h1>List</h1>
     {% if list %}
+        <p><a href="{{ path('leo_and_leo_to_do_list.list_list_edit', { 'id': list.id }) }}">Edit the list</a></p>
+        <p><a href="{{ path('leo_and_leo_to_do_list.list_list_remove', { 'id': list.id }) }}">Remove the list</a></p>
         {{ list.title }}
     {% endif %}
 {% endblock %}

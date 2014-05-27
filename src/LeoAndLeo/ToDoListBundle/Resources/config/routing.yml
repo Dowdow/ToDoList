@@ -15,3 +15,15 @@ leo_and_leo_to_do_list.list_list_id:
     defaults: { _controller: LeoAndLeoToDoListBundle:List:listid }
     requirements:
         id: \d+
+
+leo_and_leo_to_do_list.list_list_edit:
+    pattern:  /list/{id}/edit
+    defaults: { _controller: LeoAndLeoToDoListBundle:List:listedit }
+    requirements:
+        id: \d+
+
+leo_and_leo_to_do_list.list_list_remove:
+    pattern:  /list/{id}/remove
+    defaults: { _controller: LeoAndLeoToDoListBundle:List:listremove }
+    requirements:
+        id: \d+
