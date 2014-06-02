@@ -1,6 +1,6 @@
 <?php
 
-namespace LeoAndLeo\ToDoListBundle\Entity;
+namespace LeoAndLeo\ToDoListBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -12,4 +12,5 @@ use Doctrine\ORM\EntityRepository;
  */
 class ItemListRepository extends EntityRepository
 {
+
 }

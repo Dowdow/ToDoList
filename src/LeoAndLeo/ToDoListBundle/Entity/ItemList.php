@@ -3,6 +3,8 @@
 namespace LeoAndLeo\ToDoListBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * ItemList
@@ -25,6 +27,8 @@ class ItemList
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
      */
     private $title;
 
@@ -32,6 +36,8 @@ class ItemList
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
      */
     private $content;
 
@@ -39,6 +45,7 @@ class ItemList
      * @var \DateTime
      *
      * @ORM\Column(name="deadline", type="datetime")
+     * @Assert\DateTime()
      */
     private $deadline;
 
@@ -54,6 +61,14 @@ class ItemList
      * @ORM\JoinColumn(nullable=false)
      */
     private $mainlist;
+
+    /**
+     * Default Constructor
+     */
+    public function __construct()
+    {
+        $this->deadline = new \DateTime();
+    }
 
     /**
      * Get id

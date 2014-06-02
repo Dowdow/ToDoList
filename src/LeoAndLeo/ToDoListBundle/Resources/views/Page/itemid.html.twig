@@ -1,0 +1,12 @@
+{% extends '::base.html.twig' %}
+
+{%  block body %}
+    <h1>Item</h1>
+    {% if item %}
+        <p><a href="{{ path('leo_and_leo_to_do_list.item_item_edit', { 'id': item.id }) }}">Edit the item</a></p>
+        <p><a href="{{ path('leo_and_leo_to_do_list.item_item_remove', { 'id': item.id }) }}">Remove the item</a></p>
+        {{ item.title }}
+        {{ item.content }}
+        {{ item.deadline.date|date('d/m/Y') }}
+    {% endif %}
+{% endblock %}

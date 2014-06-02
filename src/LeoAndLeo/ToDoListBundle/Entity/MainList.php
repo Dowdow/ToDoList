@@ -4,6 +4,7 @@ namespace LeoAndLeo\ToDoListBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
 
 /**
  * List
@@ -40,7 +41,7 @@ class MainList {
      */
     public function __construct()
     {
-        $this->itemlists = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->itemlists = new ArrayCollection();
     }
 
 
