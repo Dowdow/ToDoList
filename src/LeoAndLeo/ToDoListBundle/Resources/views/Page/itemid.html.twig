@@ -3,10 +3,12 @@
 {%  block body %}
     <h1>Item</h1>
     {% if item %}
-        <p><a href="{{ path('leo_and_leo_to_do_list.item_item_edit', { 'id': item.id }) }}">Edit the item</a></p>
-        <p><a href="{{ path('leo_and_leo_to_do_list.item_item_remove', { 'id': item.id }) }}">Remove the item</a></p>
-        {{ item.title }}
-        {{ item.content }}
-        {{ item.deadline.date|date('d/m/Y') }}
+        <p><a href="{{ path('leo_and_leo_to_do_list.list_list_id', { 'id': item.mainlist.id }) }}">Return to the main list</a></p>
+        <p><a href="{{ path('leo_and_leo_to_do_list.item_item_edit', { 'id': item.mainlist.id, 'idItem': item.id }) }}">Edit the item</a></p>
+        <p><a href="{{ path('leo_and_leo_to_do_list.item_item_remove', { 'id': item.mainlist.id, 'idItem': item.id }) }}">Remove the item</a></p>
+        <p>{{ item.title }}</p>
+        <p>{{ item.content }}</p>
+        <p>{{ item.deadline.date|date('d/m/Y') }}</p>
+        <p>{{ item.done }}</p>
     {% endif %}
 {% endblock %}

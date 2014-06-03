@@ -14,7 +14,7 @@ class ItemController extends Controller
         $itemRepo = $em->getRepository('LeoAndLeoToDoListBundle:ItemList');
 
         $item = $itemRepo->findOneById($idItem);
-        if($item == null || ($item->getMainList()->getId() !== $id)) {
+        if($item == null || ($item->getMainlist()->getId() != $id)) {
             throw new NotFoundHttpException();
         }
 
@@ -24,29 +24,68 @@ class ItemController extends Controller
     public function itemAddAction($id) {
         $em = $this->getDoctrine()->getManager();
         $listRepo = $em->getRepository('LeoAndLeoToDoListBundle:MainList');
-        $list = $listRepo->findOneById($id);
 
+        $list = $listRepo->findOneById($id);
         if(!$list) {
             throw new NotFoundHttpException();
         }
 
         // Creation of the form
-        $itemlist = new ItemList();
-        $form = $this->createForm(new ItemListType(), $itemlist);
+        $item = new ItemList();
+        $form = $this->createForm(new ItemListType(), $item);
 
         // Exploitation of the form
         $request = $this->get('request');
         if($request->getMethod() == 'POST'){
             $form->handleRequest($request);
             if($form->isValid()){
-                $itemlist->setMainlist($list);
-                $em->persist($itemlist);
+                $item->setMainlist($list);
+                $em->persist($item);
                 $em->flush();
-                return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.item_item_id', array('id' => $id, 'idItem' => $itemlist->getId())));
+                return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.item_item_id', array('id' => $id, 'idItem' => $item->getId())));
             }
         }
 
         return $this->render('LeoAndLeoToDoListBundle:Page:itemadd.html.twig', array('form' => $form->createView()));
+    }
+
+    public function itemEditAction($id,$idItem) {
+        $em = $this->getDoctrine()->getManager();
+        $itemRepo = $em->getRepository('LeoAndLeoToDoListBundle:ItemList');
+
+        $item = $itemRepo->findOneById($idItem);
+        if($item == null || ($item->getMainlist()->getId() != $id)) {
+            throw new NotFoundHttpException();
+        }
+
+        // Creation of the form
+        $form = $this->createForm(new ItemListType(), $item);
+
+        // Exploitation of the form
+        $request = $this->get('request');
+        if($request->getMethod() == 'POST'){
+            $form->handleRequest($request);
+            if($form->isValid()){
+                $em->flush();
+                return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.item_item_id', array('id' => $id, 'idItem' => $item->getId())));
+            }
+        }
+
+        return $this->render('LeoAndLeoToDoListBundle:Page:itemedit.html.twig', array('form' => $form->createView()));
+    }
+
+    public function itemRemoveAction($id,$idItem) {
+        $em = $this->getDoctrine()->getManager();
+        $itemRepo = $em->getRepository('LeoAndLeoToDoListBundle:ItemList');
+
+        $item = $itemRepo->findOneById($idItem);
+        if($item == null || ($item->getMainlist()->getId() != $id)) {
+            throw new NotFoundHttpException();
+        }
+
+        $em->remove($item);
+        $em->flush();
+        return $this->render('LeoAndLeoToDoListBundle:Page:itemremove.html.twig');
     }
 
 }

@@ -5,6 +5,14 @@
     {% if list %}
         <p><a href="{{ path('leo_and_leo_to_do_list.list_list_edit', { 'id': list.id }) }}">Edit the list</a></p>
         <p><a href="{{ path('leo_and_leo_to_do_list.list_list_remove', { 'id': list.id }) }}">Remove the list</a></p>
+        <p><a href="{{ path('leo_and_leo_to_do_list.item_item_add', { 'id': list.id }) }}">Add an item</a></p>
         {{ list.title }}
+        <ul>
+            {% for item in list.itemlists %}
+                <li>
+                    <p><a href="{{ path('leo_and_leo_to_do_list.item_item_id', { 'id': list.id, 'idItem': item.id }) }}">{{ item.title }}</a></p>
+                </li>
+            {% endfor %}
+        </ul>
     {% endif %}
 {% endblock %}
