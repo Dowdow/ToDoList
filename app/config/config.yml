@@ -67,3 +67,12 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+# HappyR Configuration
+happy_r_google_api:
+  application_name: Leo And Leo To Do List
+  oauth2_client_id: 146850464502-710k6ecist5rurt455usljklo2al4unt.apps.googleusercontent.com
+  oauth2_client_secret: DfVOm0jl5TGMwvl2B-_tI_uj
+  oauth2_redirect_uri: http://localhost/sf2/web/app_dev.php/oauthcallback
+  developer_key: AIzaSyBhdlOoRy_DcaWeNlsFeyW-AvYYb4bfkDg
+  site_name: ToDoList
