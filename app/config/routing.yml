@@ -1,3 +1,7 @@
+leo_and_leo_google:
+    resource: "@LeoAndLeoGoogleBundle/Resources/config/routing.yml"
+    prefix:   /
+
 leo_and_leo_to_do_list:
     resource: "@LeoAndLeoToDoListBundle/Resources/config/routing.yml"
     prefix:   /

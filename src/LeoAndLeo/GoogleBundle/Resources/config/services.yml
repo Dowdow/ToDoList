@@ -1,0 +1,13 @@
+parameters:
+    leo_and_leo_google.authenticator.class: LeoAndLeo\GoogleBundle\Security\Authentication\Authenticator
+    leo_and_leo_google.access_denied_handler.class: LeoAndLeo\GoogleBundle\Security\Authorization\AccessDeniedHandler
+
+services:
+    leo_and_leo_google.authenticator:
+        class: %leo_and_leo_google.authenticator.class%
+
+    leo_and_leo_google.access_denied_handler:
+        class: %leo_and_leo_google.access_denied_handler.class%
+        arguments: [@happyr.google.api.client]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }

@@ -9,10 +9,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ListController extends Controller
 {
-    public function indexAction() {
-        return $this->render('LeoAndLeoToDoListBundle:Page:index.html.twig');
-    }
-
     public function listAction() {
         $em = $this->getDoctrine()->getManager();
         $listRepo = $em->getRepository('LeoAndLeoToDoListBundle:MainList');

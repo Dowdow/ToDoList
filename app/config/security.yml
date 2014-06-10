@@ -3,7 +3,7 @@ security:
         Symfony\Component\Security\Core\User\User: plaintext
 
     role_hierarchy:
-        HAS_TOKEN: IS_AUTHENTICATED_ANONYMOUSLY
+        ROLE_HAS_TOKEN: IS_AUTHENTICATED_ANONYMOUSLY
 
     providers:
         in_memory:
@@ -14,9 +14,12 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        antibiatch:
+        default:
             pattern: ^/
-            anonymous: ~
+            simple_preauth:
+                authenticator: leo_and_leo_google.authenticator
+            access_denied_handler: leo_and_leo_google.access_denied_handler
 
     access_control:
-        - { path: ^/, roles: HAS_TOKEN }
+        - { path: ^/oauthcallback$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_HAS_TOKEN }

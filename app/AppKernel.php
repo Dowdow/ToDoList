@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new LeoAndLeo\ToDoListBundle\LeoAndLeoToDoListBundle(),
             new HappyR\Google\ApiBundle\HappyRGoogleApiBundle(),
+            new LeoAndLeo\GoogleBundle\LeoAndLeoGoogleBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
