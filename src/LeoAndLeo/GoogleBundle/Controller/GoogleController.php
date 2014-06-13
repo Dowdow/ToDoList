@@ -29,7 +29,7 @@ class GoogleController extends Controller
             $accessToken = json_decode($accessToken);
             $accessToken = $accessToken->access_token;
 
-            $this->securityContext =$this->get('security.context');
+            $this->securityContext = $this->get('security.context');
 
             $token = $this->securityContext->getToken();
             $token = new PreAuthenticatedToken(
@@ -40,9 +40,9 @@ class GoogleController extends Controller
             );
             $this->securityContext->setToken($token);
 
-            var_dump($token);
         }
 
         return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.list_index'));
     }
+
 }

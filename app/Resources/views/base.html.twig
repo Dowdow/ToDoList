@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}To Do List !{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        <p><a href="{{ path('leo_and_leo_to_do_list.list_index') }}">Menu</a></p>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}To Do List !{% endblock %}</title>
+    {% block stylesheets %}
+        <link type="text/css" rel="stylesheet" href="{{ asset('public/css/bootstrap.min.css') }}" />
+        <link type="text/css" rel="stylesheet" href="{{ asset('public/css/grid.css') }}" />
+        <link type="text/css" rel="stylesheet" href="{{ asset('public/css/list.css') }}" />
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+<div class="container text-center">
+    <div class="jumbotron">
+        <h1>Leo and Leo To Do List !</h1>
+        <p><a href="{{ path('leo_and_leo_to_do_list.list_index') }}" class="btn btn-primary btn-lg" role="button">Menu</a></p>
+    </div>
+    <div class="text-center">
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
-    </body>
+    </div>
+</div>
+</body>
 </html>

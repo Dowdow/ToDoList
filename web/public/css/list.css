@@ -1,0 +1,15 @@
+.list-title {
+    max-width: 65em;
+    min-height: 100px;
+    max-height: 100px;
+    margin: 0 auto;
+    overflow: hidden;
+    background: linear-gradient(to right, #000000, rgba(0,255,0,0));
+}
+
+.list-title img {
+    display: block;
+    width: 100%;
+    margin-top: -26em;
+    z-index: 1;
+}
