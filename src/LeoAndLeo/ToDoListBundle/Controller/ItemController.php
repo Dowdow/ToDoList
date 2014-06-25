@@ -83,8 +83,15 @@ class ItemController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $em->remove($item);
-        $em->flush();
+        $request = $this->get('request');
+        if($request->getMethod() == 'POST') {
+            if($request->request->get('remove')) {
+                $em->remove($item);
+                $em->flush();
+                return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.list_list_id', array('id' => $id)));
+            }
+        }
+
         return $this->render('LeoAndLeoToDoListBundle:Page:itemremove.html.twig');
     }
 

@@ -83,8 +83,16 @@ class ListController extends Controller
         if($mainlist == null) {
             throw new NotFoundHttpException();
         }
-        $em->remove($mainlist);
-        $em->flush();
+
+        $request = $this->get('request');
+        if($request->getMethod() == 'POST') {
+            if($request->request->get('remove')) {
+                $em->remove($mainlist);
+                $em->flush();
+                return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.list_list'));
+            }
+        }
+
         return $this->render('LeoAndLeoToDoListBundle:Page:listremove.html.twig');
     }
 }

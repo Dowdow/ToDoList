@@ -32,7 +32,7 @@ class MainList {
     private $title;
 
     /**
-     * @ORM\OneToMany(targetEntity="LeoAndLeo\ToDoListBundle\Entity\ItemList", mappedBy="mainlist")
+     * @ORM\OneToMany(targetEntity="LeoAndLeo\ToDoListBundle\Entity\ItemList", mappedBy="mainlist", cascade={"remove"})
      */
     private $itemlists;
 
