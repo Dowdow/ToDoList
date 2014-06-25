@@ -13,7 +13,10 @@ class ListController extends Controller
         $em = $this->getDoctrine()->getManager();
         $listRepo = $em->getRepository('LeoAndLeoToDoListBundle:MainList');
 
-        $lists = $listRepo->findAll();
+        $client = $this->get('leo_and_leo_google.main_list_client');
+        $lists = $client->getAll();
+
+        //$lists = $listRepo->findAll();
 
         return $this->render('LeoAndLeoToDoListBundle:Page:list.html.twig', array('lists' => $lists));
     }

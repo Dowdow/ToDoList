@@ -44,6 +44,18 @@ class MainList {
         $this->itemlists = new ArrayCollection();
     }
 
+    /**
+     * Set id
+     *
+     * @param $id string
+     * @return MainList
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * Get id

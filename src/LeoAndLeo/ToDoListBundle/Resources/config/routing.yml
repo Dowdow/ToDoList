@@ -13,26 +13,18 @@ leo_and_leo_to_do_list.list_list_add:
 leo_and_leo_to_do_list.list_list_id:
     pattern:  /list/{id}
     defaults: { _controller: LeoAndLeoToDoListBundle:List:listid }
-    requirements:
-        id: \d+
 
 leo_and_leo_to_do_list.list_list_edit:
     pattern:  /list/{id}/edit
     defaults: { _controller: LeoAndLeoToDoListBundle:List:listedit }
-    requirements:
-        id: \d+
 
 leo_and_leo_to_do_list.list_list_remove:
     pattern:  /list/{id}/remove
     defaults: { _controller: LeoAndLeoToDoListBundle:List:listremove }
-    requirements:
-        id: \d+
 
 leo_and_leo_to_do_list.item_item:
     pattern:  /list/{id}/item
     defaults: { _controller: LeoAndLeoToDoListBundle:List:listid }
-    requirements:
-        id: \d+
 
 leo_and_leo_to_do_list.item_item_add:
     pattern:  /list/{id}/item/add
@@ -41,17 +33,11 @@ leo_and_leo_to_do_list.item_item_add:
 leo_and_leo_to_do_list.item_item_id:
     pattern:  /list/{id}/item/{idItem}
     defaults: { _controller: LeoAndLeoToDoListBundle:Item:itemid }
-    requirements:
-        id: \d+
 
 leo_and_leo_to_do_list.item_item_edit:
     pattern:  /list/{id}/item/{idItem}/edit
     defaults: { _controller: LeoAndLeoToDoListBundle:Item:itemedit }
-    requirements:
-        id: \d+
 
 leo_and_leo_to_do_list.item_item_remove:
     pattern:  /list/{id}/item/{idItem}/remove
     defaults: { _controller: LeoAndLeoToDoListBundle:Item:itemremove }
-    requirements:
-        id: \d+

@@ -26,9 +26,7 @@ class GoogleController extends Controller
             }
 
             $accessToken = $client->getAccessToken();
-            $accessToken = json_decode($accessToken);
-            $accessToken = $accessToken->access_token;
-
+            //die(var_dump($accessToken));
             $this->securityContext = $this->get('security.context');
 
             $token = $this->securityContext->getToken();
@@ -41,6 +39,13 @@ class GoogleController extends Controller
             $this->securityContext->setToken($token);
 
         }
+
+        return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.list_index'));
+    }
+
+    public function disconnectAction() {
+        $security = $this->get('security.context');
+        $security->setToken(null);
 
         return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.list_index'));
     }

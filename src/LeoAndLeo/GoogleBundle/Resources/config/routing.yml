@@ -1,3 +1,7 @@
 leo_and_leo_google.google_callback:
     pattern:  /oauthcallback
     defaults: { _controller: LeoAndLeoGoogleBundle:Google:callback }
+
+leo_and_leo_google.google_disconnect:
+    pattern:  /disconnect
+    defaults: { _controller: LeoAndLeoGoogleBundle:Google:disconnect }
