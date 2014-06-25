@@ -13,9 +13,16 @@
             </div>
         </nav>
 
-        <p>{{ item.title }}</p>
-        <p>{{ item.content }}</p>
-        <p>{{ item.deadline.date|date('d/m/Y') }}</p>
-        <p>{{ item.done }}</p>
+        <div class="item-list">
+            <div class="item-info">
+                <h4>Title : {{ item.title }}</h4>
+                <h4>Deadline : {{ item.deadline.date|date('d/m/Y') }}</h4>
+                <h4>Done : {{ item.done }}</h4>
+                <img src="{{ asset("public/img/nyan.png") }}" alt="image"/>
+            </div>
+            <div class="item-content">
+                <h4>Content : {{ item.content }}</h4>
+            </div>
+        </div>
     {% endif %}
 {% endblock %}
