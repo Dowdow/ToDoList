@@ -21,5 +21,5 @@ security:
             access_denied_handler: leo_and_leo_google.access_denied_handler
 
     access_control:
-        - { path: ^/oauthcallback$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: ROLE_HAS_TOKEN }
+        - { path: ^/google/oauthcallback$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/google, roles: ROLE_HAS_TOKEN }

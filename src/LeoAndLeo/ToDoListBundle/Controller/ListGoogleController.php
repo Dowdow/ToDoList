@@ -2,18 +2,19 @@
 
 namespace LeoAndLeo\ToDoListBundle\Controller;
 
-use LeoAndLeo\ToDoListBundle\Entity\MainList;
-use LeoAndLeo\ToDoListBundle\Form\MainListType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class ListController extends Controller
-{
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+class ListGoogleController extends Controller {
+
     public function listAction() {
         $em = $this->getDoctrine()->getManager();
         $listRepo = $em->getRepository('LeoAndLeoToDoListBundle:MainList');
 
-        $lists = $listRepo->findAll();
+        $client = $this->get('leo_and_leo_google.main_list_client');
+        $lists = $client->getAll();
+
+        //$lists = $listRepo->findAll();
 
         return $this->render('LeoAndLeoToDoListBundle:Page:list.html.twig', array('lists' => $lists));
     }
@@ -95,4 +96,5 @@ class ListController extends Controller
 
         return $this->render('LeoAndLeoToDoListBundle:Page:listremove.html.twig');
     }
-}
+
+} 

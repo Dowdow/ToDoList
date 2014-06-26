@@ -1,43 +1,109 @@
-leo_and_leo_to_do_list.list_index:
+#################
+# Global Routes #
+#################
+leo_and_leo_to_do_list.index:
     pattern:  /
+    defaults: { _controller: LeoAndLeoToDoListBundle:Default:index }
+
+#########################################
+# Routes for local ToDoList Application #
+#########################################
+leo_and_leo_to_do_list.list_index:
+    pattern:  /local
     defaults: { _controller: LeoAndLeoToDoListBundle:List:list }
 
 leo_and_leo_to_do_list.list_list:
-    pattern:  /list
+    pattern:  /local/list
     defaults: { _controller: LeoAndLeoToDoListBundle:List:list }
 
 leo_and_leo_to_do_list.list_list_add:
-    pattern:  /list/add
+    pattern:  /local/list/add
     defaults: { _controller: LeoAndLeoToDoListBundle:List:listadd }
 
 leo_and_leo_to_do_list.list_list_id:
-    pattern:  /list/{id}
+    pattern:  /local/list/{id}
     defaults: { _controller: LeoAndLeoToDoListBundle:List:listid }
+    requirements:
+        id: \d+
 
 leo_and_leo_to_do_list.list_list_edit:
-    pattern:  /list/{id}/edit
+    pattern:  /local/list/{id}/edit
     defaults: { _controller: LeoAndLeoToDoListBundle:List:listedit }
+    requirements:
+        id: \d+
 
 leo_and_leo_to_do_list.list_list_remove:
-    pattern:  /list/{id}/remove
+    pattern:  /local/list/{id}/remove
     defaults: { _controller: LeoAndLeoToDoListBundle:List:listremove }
-
-leo_and_leo_to_do_list.item_item:
-    pattern:  /list/{id}/item
-    defaults: { _controller: LeoAndLeoToDoListBundle:List:listid }
+    requirements:
+        id: \d+
 
 leo_and_leo_to_do_list.item_item_add:
-    pattern:  /list/{id}/item/add
+    pattern:  /local/list/{id}/item/add
     defaults: { _controller: LeoAndLeoToDoListBundle:Item:itemadd }
+    requirements:
+        id: \d+
 
 leo_and_leo_to_do_list.item_item_id:
-    pattern:  /list/{id}/item/{idItem}
+    pattern:  /local/list/{id}/item/{idItem}
     defaults: { _controller: LeoAndLeoToDoListBundle:Item:itemid }
+    requirements:
+        id: \d+
+        idItem: \d+
 
 leo_and_leo_to_do_list.item_item_edit:
-    pattern:  /list/{id}/item/{idItem}/edit
+    pattern:  /local/list/{id}/item/{idItem}/edit
     defaults: { _controller: LeoAndLeoToDoListBundle:Item:itemedit }
+    requirements:
+        id: \d+
+        idItem: \d+
 
 leo_and_leo_to_do_list.item_item_remove:
-    pattern:  /list/{id}/item/{idItem}/remove
+    pattern:  /local/list/{id}/item/{idItem}/remove
+    defaults: { _controller: LeoAndLeoToDoListBundle:Item:itemremove }
+    requirements:
+        id: \d+
+        idItem: \d+
+
+##########################################
+# Routes for Google ToDoList Application #
+##########################################
+leo_and_leo_to_do_list.list_google_index:
+    pattern:  /google
+    defaults: { _controller: LeoAndLeoToDoListBundle:List:list }
+
+leo_and_leo_to_do_list.list_google_list:
+    pattern:  /google/list
+    defaults: { _controller: LeoAndLeoToDoListBundle:List:list }
+
+leo_and_leo_to_do_list.list_google_list_add:
+    pattern:  /google/list/add
+    defaults: { _controller: LeoAndLeoToDoListBundle:List:listadd }
+
+leo_and_leo_to_do_list.list_google_list_id:
+    pattern:  /google/list/{id}
+    defaults: { _controller: LeoAndLeoToDoListBundle:List:listid }
+
+leo_and_leo_to_do_list.list_google_list_edit:
+    pattern:  /google/list/{id}/edit
+    defaults: { _controller: LeoAndLeoToDoListBundle:List:listedit }
+
+leo_and_leo_to_do_list.list_google_list_remove:
+    pattern:  /google/list/{id}/remove
+    defaults: { _controller: LeoAndLeoToDoListBundle:List:listremove }
+
+leo_and_leo_to_do_list.item_google_item_add:
+    pattern:  /google/list/{id}/item/add
+    defaults: { _controller: LeoAndLeoToDoListBundle:Item:itemadd }
+
+leo_and_leo_to_do_list.item_google_item_id:
+    pattern:  /google/list/{id}/item/{idItem}
+    defaults: { _controller: LeoAndLeoToDoListBundle:Item:itemid }
+
+leo_and_leo_to_do_list.item_google_item_edit:
+    pattern:  /google/list/{id}/item/{idItem}/edit
+    defaults: { _controller: LeoAndLeoToDoListBundle:Item:itemedit }
+
+leo_and_leo_to_do_list.item_google_item_remove:
+    pattern:  /google/list/{id}/item/{idItem}/remove
     defaults: { _controller: LeoAndLeoToDoListBundle:Item:itemremove }
