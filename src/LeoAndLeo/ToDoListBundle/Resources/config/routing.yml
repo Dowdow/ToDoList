@@ -70,40 +70,40 @@ leo_and_leo_to_do_list.item_item_remove:
 ##########################################
 leo_and_leo_to_do_list.list_google_index:
     pattern:  /google
-    defaults: { _controller: LeoAndLeoToDoListBundle:List:list }
+    defaults: { _controller: LeoAndLeoToDoListBundle:ListGoogle:list }
 
 leo_and_leo_to_do_list.list_google_list:
     pattern:  /google/list
-    defaults: { _controller: LeoAndLeoToDoListBundle:List:list }
+    defaults: { _controller: LeoAndLeoToDoListBundle:ListGoogle:list }
 
 leo_and_leo_to_do_list.list_google_list_add:
     pattern:  /google/list/add
-    defaults: { _controller: LeoAndLeoToDoListBundle:List:listadd }
+    defaults: { _controller: LeoAndLeoToDoListBundle:ListGoogle:listadd }
 
 leo_and_leo_to_do_list.list_google_list_id:
     pattern:  /google/list/{id}
-    defaults: { _controller: LeoAndLeoToDoListBundle:List:listid }
+    defaults: { _controller: LeoAndLeoToDoListBundle:ListGoogle:listid }
 
 leo_and_leo_to_do_list.list_google_list_edit:
     pattern:  /google/list/{id}/edit
-    defaults: { _controller: LeoAndLeoToDoListBundle:List:listedit }
+    defaults: { _controller: LeoAndLeoToDoListBundle:ListGoogle:listedit }
 
 leo_and_leo_to_do_list.list_google_list_remove:
     pattern:  /google/list/{id}/remove
-    defaults: { _controller: LeoAndLeoToDoListBundle:List:listremove }
+    defaults: { _controller: LeoAndLeoToDoListBundle:ListGoogle:listremove }
 
 leo_and_leo_to_do_list.item_google_item_add:
     pattern:  /google/list/{id}/item/add
-    defaults: { _controller: LeoAndLeoToDoListBundle:Item:itemadd }
+    defaults: { _controller: LeoAndLeoToDoListBundle:ItemGoogle:itemadd }
 
 leo_and_leo_to_do_list.item_google_item_id:
     pattern:  /google/list/{id}/item/{idItem}
-    defaults: { _controller: LeoAndLeoToDoListBundle:Item:itemid }
+    defaults: { _controller: LeoAndLeoToDoListBundle:ItemGoogle:itemid }
 
 leo_and_leo_to_do_list.item_google_item_edit:
     pattern:  /google/list/{id}/item/{idItem}/edit
-    defaults: { _controller: LeoAndLeoToDoListBundle:Item:itemedit }
+    defaults: { _controller: LeoAndLeoToDoListBundle:ItemGoogle:itemedit }
 
 leo_and_leo_to_do_list.item_google_item_remove:
     pattern:  /google/list/{id}/item/{idItem}/remove
-    defaults: { _controller: LeoAndLeoToDoListBundle:Item:itemremove }
+    defaults: { _controller: LeoAndLeoToDoListBundle:ItemGoogle:itemremove }

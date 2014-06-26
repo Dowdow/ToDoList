@@ -18,7 +18,7 @@ class ItemController extends Controller
             throw new NotFoundHttpException();
         }
 
-        return $this->render('LeoAndLeoToDoListBundle:Page:itemid.html.twig', array('item' => $item));
+        return $this->render('LeoAndLeoToDoListBundle:Local:itemid.html.twig', array('item' => $item));
     }
 
     public function itemAddAction($id) {
@@ -46,7 +46,7 @@ class ItemController extends Controller
             }
         }
 
-        return $this->render('LeoAndLeoToDoListBundle:Page:itemadd.html.twig', array('form' => $form->createView()));
+        return $this->render('LeoAndLeoToDoListBundle:Local:itemadd.html.twig', array('form' => $form->createView()));
     }
 
     public function itemEditAction($id,$idItem) {
@@ -71,7 +71,7 @@ class ItemController extends Controller
             }
         }
 
-        return $this->render('LeoAndLeoToDoListBundle:Page:itemedit.html.twig', array('form' => $form->createView()));
+        return $this->render('LeoAndLeoToDoListBundle:Local:itemedit.html.twig', array('form' => $form->createView()));
     }
 
     public function itemRemoveAction($id,$idItem) {
@@ -92,7 +92,7 @@ class ItemController extends Controller
             }
         }
 
-        return $this->render('LeoAndLeoToDoListBundle:Page:itemremove.html.twig');
+        return $this->render('LeoAndLeoToDoListBundle:Local:itemremove.html.twig');
     }
 
 }

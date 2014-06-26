@@ -1,0 +1,41 @@
+{% extends '::base.html.twig' %}
+
+{%  block body %}
+    {% if list %}
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li><a><b>{{ list.title }}</b></a></li>
+                    <li><a href="{{ path('leo_and_leo_to_do_list.list_google_list_edit', { 'id': list.id }) }}">Edit the list</a></li>
+                    <li><a href="{{ path('leo_and_leo_to_do_list.list_google_list_remove', { 'id': list.id }) }}">Remove the list</a></li>
+                    <li><a href="{{ path('leo_and_leo_to_do_list.item_google_item_add', { 'id': list.id }) }}">Add an item</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="list-title">
+            <h1>{{ list.title }}</h1>
+            <img src="{{ asset("public/img/nyan.png") }}" alt="image"/>
+        </div>
+
+        <div id="grid-gallery" class="grid-gallery">
+            <section class="grid-wrap">
+                <ul class="grid">
+                    <li class="grid-sizer"></li>
+                    {% for item in list.itemlists %}
+                        <li>
+                            <figure>
+                                <img src="{{ asset('public/img/nyan.png') }}" alt="image"/>
+                                <figcaption>
+                                    <h3><a href="{{ path('leo_and_leo_to_do_list.item_google_item_id', { 'id': list.id, 'idItem': item.id }) }}">{{ item.title }}</a></h3>
+                                    <p></p>
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li></li>
+                    {% endfor %}
+                </ul>
+            </section>
+        </div>
+    {% endif %}
+{% endblock %}

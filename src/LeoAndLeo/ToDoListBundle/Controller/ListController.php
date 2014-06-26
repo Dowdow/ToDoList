@@ -15,7 +15,7 @@ class ListController extends Controller
 
         $lists = $listRepo->findAll();
 
-        return $this->render('LeoAndLeoToDoListBundle:Page:list.html.twig', array('lists' => $lists));
+        return $this->render('LeoAndLeoToDoListBundle:Local:list.html.twig', array('lists' => $lists));
     }
 
     public function listIdAction($id) {
@@ -27,7 +27,7 @@ class ListController extends Controller
             throw new NotFoundHttpException();
         }
 
-        return $this->render('LeoAndLeoToDoListBundle:Page:listid.html.twig', array('list' => $list));
+        return $this->render('LeoAndLeoToDoListBundle:Local:listid.html.twig', array('list' => $list));
     }
 
     public function listAddAction() {
@@ -48,7 +48,7 @@ class ListController extends Controller
             }
         }
 
-        return $this->render('LeoAndLeoToDoListBundle:Page:listadd.html.twig', array('form' => $form->createView()));
+        return $this->render('LeoAndLeoToDoListBundle:Local:listadd.html.twig', array('form' => $form->createView()));
     }
 
     public function listEditAction($id) {
@@ -72,7 +72,7 @@ class ListController extends Controller
             }
         }
 
-        return $this->render('LeoAndLeoToDoListBundle:Page:listedit.html.twig', array('form' => $form->createView()));
+        return $this->render('LeoAndLeoToDoListBundle:Local:listedit.html.twig', array('form' => $form->createView()));
     }
 
     public function listRemoveAction($id) {
@@ -93,6 +93,6 @@ class ListController extends Controller
             }
         }
 
-        return $this->render('LeoAndLeoToDoListBundle:Page:listremove.html.twig');
+        return $this->render('LeoAndLeoToDoListBundle:Local:listremove.html.twig');
     }
 }

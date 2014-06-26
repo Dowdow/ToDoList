@@ -40,14 +40,14 @@ class GoogleController extends Controller
 
         }
 
-        return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.list_index'));
+        return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.list_google_index'));
     }
 
     public function disconnectAction() {
         $security = $this->get('security.context');
         $security->setToken(null);
 
-        return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.list_index'));
+        return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.index'));
     }
 
 }

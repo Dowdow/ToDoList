@@ -4,36 +4,28 @@ namespace LeoAndLeo\ToDoListBundle\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use LeoAndLeo\ToDoListBundle\Entity\MainList;
+use LeoAndLeo\ToDoListBundle\Form\MainListType;
 
 class ListGoogleController extends Controller {
 
     public function listAction() {
-        $em = $this->getDoctrine()->getManager();
-        $listRepo = $em->getRepository('LeoAndLeoToDoListBundle:MainList');
-
         $client = $this->get('leo_and_leo_google.main_list_client');
         $lists = $client->getAll();
-
-        //$lists = $listRepo->findAll();
-
-        return $this->render('LeoAndLeoToDoListBundle:Page:list.html.twig', array('lists' => $lists));
+        return $this->render('LeoAndLeoToDoListBundle:Google:list.html.twig', array('lists' => $lists));
     }
 
     public function listIdAction($id) {
-        $em = $this->getDoctrine()->getManager();
-        $listRepo = $em->getRepository('LeoAndLeoToDoListBundle:MainList');
-
-        $list = $listRepo->findOneById($id);
+        $client = $this->get('leo_and_leo_google.main_list_client');
+        $list = $client->get($id);
         if($list == null) {
             throw new NotFoundHttpException();
         }
-
-        return $this->render('LeoAndLeoToDoListBundle:Page:listid.html.twig', array('list' => $list));
+        return $this->render('LeoAndLeoToDoListBundle:Google:listid.html.twig', array('list' => $list));
     }
 
     public function listAddAction() {
-        $em = $this->getDoctrine()->getManager();
-
         // Creation of the form
         $mainlist = new MainList();
         $form = $this->createForm(new MainListType(), $mainlist);
@@ -43,21 +35,20 @@ class ListGoogleController extends Controller {
         if($request->getMethod() == 'POST'){
             $form->handleRequest($request);
             if($form->isValid()){
-                $em->persist($mainlist);
-                $em->flush();
-                return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.list_list_id', array('id' => $mainlist->getId())));
+                $client = $this->get('leo_and_leo_google.main_list_client');
+                $mainlist = $client->insert($mainlist);
+                return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.list_google_list_id', array('id' => $mainlist->getId())));
             }
         }
 
-        return $this->render('LeoAndLeoToDoListBundle:Page:listadd.html.twig', array('form' => $form->createView()));
+        return $this->render('LeoAndLeoToDoListBundle:Google:listadd.html.twig', array('form' => $form->createView()));
     }
 
     public function listEditAction($id) {
-        $em = $this->getDoctrine()->getManager();
-        $listrepo = $em->getRepository('LeoAndLeoToDoListBundle:MainList');
+        $client = $this->get('leo_and_leo_google.main_list_client');
 
         // Creation of the form
-        $mainlist = $listrepo->findOneById($id);
+        $mainlist = $client->get($id);
         if($mainlist == null) {
             throw new NotFoundHttpException();
         }
@@ -68,19 +59,18 @@ class ListGoogleController extends Controller {
         if($request->getMethod() == 'POST'){
             $form->handleRequest($request);
             if($form->isValid()){
-                $em->flush();
-                return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.list_list_id', array('id' => $mainlist->getId())));
+                $client->update($mainlist);
+                return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.list_google_list_id', array('id' => $mainlist->getId())));
             }
         }
 
-        return $this->render('LeoAndLeoToDoListBundle:Page:listedit.html.twig', array('form' => $form->createView()));
+        return $this->render('LeoAndLeoToDoListBundle:Google:listedit.html.twig', array('form' => $form->createView()));
     }
 
     public function listRemoveAction($id) {
-        $em = $this->getDoctrine()->getManager();
-        $listrepo = $em->getRepository('LeoAndLeoToDoListBundle:MainList');
+        $client = $this->get('leo_and_leo_google.main_list_client');
 
-        $mainlist = $listrepo->findOneById($id);
+        $mainlist = $client->get($id);
         if($mainlist == null) {
             throw new NotFoundHttpException();
         }
@@ -88,13 +78,12 @@ class ListGoogleController extends Controller {
         $request = $this->get('request');
         if($request->getMethod() == 'POST') {
             if($request->request->get('remove')) {
-                $em->remove($mainlist);
-                $em->flush();
-                return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.list_list'));
+                $client->delete($id);
+                return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.list_google_list'));
             }
         }
 
-        return $this->render('LeoAndLeoToDoListBundle:Page:listremove.html.twig');
+        return $this->render('LeoAndLeoToDoListBundle:Google:listremove.html.twig');
     }
 
 } 

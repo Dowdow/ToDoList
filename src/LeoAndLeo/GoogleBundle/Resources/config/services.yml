@@ -3,12 +3,7 @@ parameters:
     leo_and_leo_google.access_denied_handler.class: LeoAndLeo\GoogleBundle\Security\Authorization\AccessDeniedHandler
 
     leo_and_leo_google.main_list_client.class: LeoAndLeo\GoogleBundle\Service\MainListClient
-    leo_and_leo_google.task_route:
-        list: https://www.googleapis.com/tasks/v1/users/@me/lists
-        get:
-        insert:
-        update:
-        delete:
+    leo_and_leo_google.item_list_client.class: LeoAndLeo\GoogleBundle\Service\ItemListClient
 
 services:
     leo_and_leo_google.authenticator:
@@ -23,3 +18,7 @@ services:
     leo_and_leo_google.main_list_client:
         class: %leo_and_leo_google.main_list_client.class%
         arguments: [@happyr.google.api.client, @security.context]
+
+    leo_and_leo_google.item_list_client:
+            class: %leo_and_leo_google.item_list_client.class%
+            arguments: [@happyr.google.api.client, @security.context]

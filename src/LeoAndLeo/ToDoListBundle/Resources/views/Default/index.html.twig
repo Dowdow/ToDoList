@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{%  block body %}
+    <h1>Choice of application</h1>
+    <div class="container">
+        <div class="col-md-6">
+            <p><a href="{{ path('leo_and_leo_to_do_list.list_index') }}" class="btn btn-primary btn-lg" role="button">Local application</a></p>
+            <h4>You can continue your navigation and use the local application</h4>
+        </div>
+        <div class="col-md-6">
+            <p><a href="{{ path('leo_and_leo_to_do_list.list_google_index') }}" class="btn btn-primary btn-lg" role="button">Google application</a></p>
+            <h4>You can ahthorize your Google account to use the Google application</h4>
+        </div>
+    </div>
+
+{% endblock %}

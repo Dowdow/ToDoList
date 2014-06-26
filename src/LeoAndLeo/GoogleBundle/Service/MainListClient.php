@@ -32,31 +32,77 @@ class MainListClient {
     public function getAll() {
         $mainlists = array();
         $tasks = $this->service->tasklists->listTasklists()->getItems();
-        var_dump($tasks);
         foreach($tasks as $key => $value) {
-            $mainlist = new MainList();
-            $mainlist->setId($value->id);
-            $mainlist->setTitle($value->title);
-            $mainlists[$key] = $mainlist;
+            $mainlists[$key] = $this->buildTaskList($value);
         }
 
         return $mainlists;
     }
 
+    /**
+     * Get a user task list
+     * @param $id string the id of the task list
+     * @return MainList
+     */
     public function get($id) {
-
+        $taskList = $this->service->tasklists->get($id);
+        return $this->buildTaskList($taskList);
     }
 
-    public function insert() {
+    /**
+     * @param $mainList MainList
+     * @return MainList
+     */
+    public function insert($mainList) {
+        $taskList = new \Google_Service_Tasks_TaskList();
+        $taskList->setKind('tasks#taskList');
+        $taskList->setTitle($mainList->getTitle());
+        $date = new \DateTime();
+        $date->format(\DateTime::RFC3339);
+        $taskList->setUpdated($date);
 
+        $taskList = $this->service->tasklists->insert($taskList);
+        return $this->buildTaskList($taskList);
     }
 
-    public function update($id) {
+    /**
+     * @param $mainList MainList
+     * @return MainList
+     */
+    public function update($mainList) {
+        $taskList = new \Google_Service_Tasks_TaskList();
+        $taskList->setKind('tasks#taskList');
+        $taskList->setId($mainList->getId());
+        $taskList->setTitle($mainList->getTitle());
+        $date = new \DateTime();
+        $date->format(\DateTime::RFC3339);
+        $taskList->setUpdated($date);
 
+        $taskList = $this->service->tasklists->update($mainList->getId(),$taskList);
+        return $this->buildTaskList($taskList);
     }
 
+    /**
+     * @param $id string the id of the task list
+     */
     public function delete($id) {
+        $this->service->tasklists->delete($id);
+    }
 
+    /**
+     * Convert the json Google return into MainList object
+     * @param $taskList string
+     * @return MainList
+     */
+    private function buildTaskList($taskList) {
+        $list = new MainList();
+        if(isset($taskList->id)){
+            $list->setId($taskList->id);
+        }
+        if(isset($taskList->title)) {
+            $list->setTitle($taskList->title);
+        }
+        return $list;
     }
 
 } 

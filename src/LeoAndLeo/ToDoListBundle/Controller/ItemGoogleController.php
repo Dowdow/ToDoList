@@ -16,7 +16,7 @@ class ItemGoogleController extends Controller {
             throw new NotFoundHttpException();
         }
 
-        return $this->render('LeoAndLeoToDoListBundle:Page:itemid.html.twig', array('item' => $item));
+        return $this->render('LeoAndLeoToDoListBundle:Google:itemid.html.twig', array('item' => $item));
     }
 
     public function itemAddAction($id) {
@@ -40,11 +40,11 @@ class ItemGoogleController extends Controller {
                 $item->setMainlist($list);
                 $em->persist($item);
                 $em->flush();
-                return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.item_item_id', array('id' => $id, 'idItem' => $item->getId())));
+                return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.item_google_item_id', array('id' => $id, 'idItem' => $item->getId())));
             }
         }
 
-        return $this->render('LeoAndLeoToDoListBundle:Page:itemadd.html.twig', array('form' => $form->createView()));
+        return $this->render('LeoAndLeoToDoListBundle:Google:itemadd.html.twig', array('form' => $form->createView()));
     }
 
     public function itemEditAction($id,$idItem) {
@@ -65,11 +65,11 @@ class ItemGoogleController extends Controller {
             $form->handleRequest($request);
             if($form->isValid()){
                 $em->flush();
-                return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.item_item_id', array('id' => $id, 'idItem' => $item->getId())));
+                return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.item_google_item_id', array('id' => $id, 'idItem' => $item->getId())));
             }
         }
 
-        return $this->render('LeoAndLeoToDoListBundle:Page:itemedit.html.twig', array('form' => $form->createView()));
+        return $this->render('LeoAndLeoToDoListBundle:Google:itemedit.html.twig', array('form' => $form->createView()));
     }
 
     public function itemRemoveAction($id,$idItem) {
@@ -86,10 +86,10 @@ class ItemGoogleController extends Controller {
             if($request->request->get('remove')) {
                 $em->remove($item);
                 $em->flush();
-                return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.list_list_id', array('id' => $id)));
+                return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.list_google_list_id', array('id' => $id)));
             }
         }
 
-        return $this->render('LeoAndLeoToDoListBundle:Page:itemremove.html.twig');
+        return $this->render('LeoAndLeoToDoListBundle:Google:itemremove.html.twig');
     }
 } 
