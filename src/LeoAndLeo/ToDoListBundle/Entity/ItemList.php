@@ -71,6 +71,19 @@ class ItemList
     }
 
     /**
+     * Set id
+     *
+     * @param $id string
+     * @return ItemList
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -178,7 +191,7 @@ class ItemList
      * @param \LeoAndLeo\ToDoListBundle\Entity\MainList $mainlist
      * @return ItemList
      */
-    public function setMainlist(\LeoAndLeo\ToDoListBundle\Entity\MainList $mainlist)
+    public function setMainlist(MainList $mainlist)
     {
         $this->mainlist = $mainlist;
 

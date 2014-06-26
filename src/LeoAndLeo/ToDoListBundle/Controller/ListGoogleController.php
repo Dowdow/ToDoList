@@ -2,7 +2,6 @@
 
 namespace LeoAndLeo\ToDoListBundle\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use LeoAndLeo\ToDoListBundle\Entity\MainList;
@@ -59,7 +58,7 @@ class ListGoogleController extends Controller {
         if($request->getMethod() == 'POST'){
             $form->handleRequest($request);
             if($form->isValid()){
-                $client->update($mainlist);
+                $mainlist = $client->update($mainlist);
                 return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.list_google_list_id', array('id' => $mainlist->getId())));
             }
         }

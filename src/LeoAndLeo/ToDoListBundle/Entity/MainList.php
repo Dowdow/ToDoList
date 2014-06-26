@@ -96,7 +96,7 @@ class MainList {
      * @param \LeoAndLeo\ToDoListBundle\Entity\ItemList $itemlists
      * @return MainList
      */
-    public function addItemlist(\LeoAndLeo\ToDoListBundle\Entity\ItemList $itemlists)
+    public function addItemlist(ItemList $itemlists)
     {
         $this->itemlists[] = $itemlists;
         $itemlists->setMainlist($this);
@@ -108,7 +108,7 @@ class MainList {
      *
      * @param \LeoAndLeo\ToDoListBundle\Entity\ItemList $itemlists
      */
-    public function removeItemlist(\LeoAndLeo\ToDoListBundle\Entity\ItemList $itemlists)
+    public function removeItemlist(ItemList $itemlists)
     {
         $this->itemlists->removeElement($itemlists);
     }

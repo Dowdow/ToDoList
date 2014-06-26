@@ -5,7 +5,6 @@ namespace LeoAndLeo\GoogleBundle\Service;
 use Google_Service_Tasks;
 use HappyR\Google\ApiBundle\Services\GoogleClient;
 use LeoAndLeo\ToDoListBundle\Entity\MainList;
-use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Security\Core\SecurityContext;
 
 class MainListClient {
@@ -13,12 +12,17 @@ class MainListClient {
     /** @var Google_Service_Tasks the Service task class */
     private $service;
 
+    /** @var ItemListClient the Item List Client service */
+    private $itemListClient;
+
     /**
      * Constructor
      * @param $client GoogleClient
      * @param $security SecurityContext
+     * @param $itemListClient
      */
-    public function __construct($client, $security) {
+    public function __construct($client, $security, $itemListClient) {
+        $this->itemListClient = $itemListClient;
         $token = $security->getToken()->getUser();
         $googleClient = $client->getGoogleClient();
         $googleClient->setAccessToken($token);
@@ -28,12 +32,17 @@ class MainListClient {
 
     /**
      * Get all the user tasks list
+     * @return array
      */
     public function getAll() {
         $mainlists = array();
         $tasks = $this->service->tasklists->listTasklists()->getItems();
         foreach($tasks as $key => $value) {
             $mainlists[$key] = $this->buildTaskList($value);
+            $itemlists = $this->itemListClient->getAll($mainlists[$key]->getId());
+            foreach($itemlists as $item) {
+                $mainlists[$key]->addItemlist($item);
+            }
         }
 
         return $mainlists;
@@ -46,10 +55,16 @@ class MainListClient {
      */
     public function get($id) {
         $taskList = $this->service->tasklists->get($id);
-        return $this->buildTaskList($taskList);
+        $taskList = $this->buildTaskList($taskList);
+        $itemlists = $this->itemListClient->getAll($taskList->getId());
+        foreach($itemlists as $item) {
+            $taskList->addItemlist($item);
+        }
+        return $taskList;
     }
 
     /**
+     * Add a user task list
      * @param $mainList MainList
      * @return MainList
      */
@@ -66,6 +81,7 @@ class MainListClient {
     }
 
     /**
+     * Edit a user task list
      * @param $mainList MainList
      * @return MainList
      */
@@ -83,6 +99,7 @@ class MainListClient {
     }
 
     /**
+     * Remove a user task list
      * @param $id string the id of the task list
      */
     public function delete($id) {

@@ -17,7 +17,7 @@ services:
 
     leo_and_leo_google.main_list_client:
         class: %leo_and_leo_google.main_list_client.class%
-        arguments: [@happyr.google.api.client, @security.context]
+        arguments: [@happyr.google.api.client, @security.context, @leo_and_leo_google.item_list_client]
 
     leo_and_leo_google.item_list_client:
             class: %leo_and_leo_google.item_list_client.class%

@@ -4,14 +4,16 @@ namespace LeoAndLeo\ToDoListBundle\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use LeoAndLeo\ToDoListBundle\Entity\ItemList;
+use LeoAndLeo\ToDoListBundle\Form\ItemListType;
 
 class ItemGoogleController extends Controller {
 
     public function itemIdAction($id, $idItem) {
-        $em = $this->getDoctrine()->getManager();
-        $itemRepo = $em->getRepository('LeoAndLeoToDoListBundle:ItemList');
+        $client = $this->get('leo_and_leo_google.item_list_client');
 
-        $item = $itemRepo->findOneById($idItem);
+        $item = $client->get($id, $idItem);
         if($item == null || ($item->getMainlist()->getId() != $id)) {
             throw new NotFoundHttpException();
         }
@@ -20,10 +22,9 @@ class ItemGoogleController extends Controller {
     }
 
     public function itemAddAction($id) {
-        $em = $this->getDoctrine()->getManager();
-        $listRepo = $em->getRepository('LeoAndLeoToDoListBundle:MainList');
+        $client = $this->get('leo_and_leo_google.main_list_client');
 
-        $list = $listRepo->findOneById($id);
+        $list = $client->get($id);
         if(!$list) {
             throw new NotFoundHttpException();
         }
@@ -38,8 +39,8 @@ class ItemGoogleController extends Controller {
             $form->handleRequest($request);
             if($form->isValid()){
                 $item->setMainlist($list);
-                $em->persist($item);
-                $em->flush();
+                $client = $this->get('leo_and_leo_google.item_list_client');
+                $item = $client->insert($id, $item);
                 return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.item_google_item_id', array('id' => $id, 'idItem' => $item->getId())));
             }
         }
@@ -48,10 +49,9 @@ class ItemGoogleController extends Controller {
     }
 
     public function itemEditAction($id,$idItem) {
-        $em = $this->getDoctrine()->getManager();
-        $itemRepo = $em->getRepository('LeoAndLeoToDoListBundle:ItemList');
+        $client = $this->get('leo_and_leo_google.item_list_client');
 
-        $item = $itemRepo->findOneById($idItem);
+        $item = $client->get($id, $idItem);
         if($item == null || ($item->getMainlist()->getId() != $id)) {
             throw new NotFoundHttpException();
         }
@@ -64,7 +64,7 @@ class ItemGoogleController extends Controller {
         if($request->getMethod() == 'POST'){
             $form->handleRequest($request);
             if($form->isValid()){
-                $em->flush();
+                $item = $client->update($id, $item);
                 return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.item_google_item_id', array('id' => $id, 'idItem' => $item->getId())));
             }
         }
@@ -73,10 +73,9 @@ class ItemGoogleController extends Controller {
     }
 
     public function itemRemoveAction($id,$idItem) {
-        $em = $this->getDoctrine()->getManager();
-        $itemRepo = $em->getRepository('LeoAndLeoToDoListBundle:ItemList');
+        $client = $this->get('leo_and_leo_google.item_list_client');
 
-        $item = $itemRepo->findOneById($idItem);
+        $item = $client->get($id, $idItem);
         if($item == null || ($item->getMainlist()->getId() != $id)) {
             throw new NotFoundHttpException();
         }
@@ -84,8 +83,7 @@ class ItemGoogleController extends Controller {
         $request = $this->get('request');
         if($request->getMethod() == 'POST') {
             if($request->request->get('remove')) {
-                $em->remove($item);
-                $em->flush();
+                $client->delete($id, $idItem);
                 return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.list_google_list_id', array('id' => $id)));
             }
         }
