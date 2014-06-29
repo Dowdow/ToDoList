@@ -18,7 +18,6 @@ class ItemListType extends AbstractType
             ->add('title', 'text')
             ->add('content', 'text')
             ->add('deadline', 'datetime')
-            ->add('done', 'checkbox')
         ;
     }
     

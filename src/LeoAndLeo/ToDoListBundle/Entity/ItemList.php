@@ -68,6 +68,7 @@ class ItemList
     public function __construct()
     {
         $this->deadline = new \DateTime();
+        $this->done = false;
     }
 
     /**
@@ -183,6 +184,18 @@ class ItemList
     public function getDone()
     {
         return $this->done;
+    }
+
+    /**
+     * Inverse the boolean value of done
+     */
+    public function inverseDone() {
+        if($this->done) {
+            $this->done = false;
+        }
+        else {
+            $this->done = true;
+        }
     }
 
     /**

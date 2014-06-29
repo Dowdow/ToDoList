@@ -21,6 +21,21 @@ class ListGoogleController extends Controller {
         if($list == null) {
             throw new NotFoundHttpException();
         }
+
+        $request = $this->get('request');
+        if($request->getMethod() == 'POST'){
+            if($request->request->get('done') && $request->request->get('id')) {
+                foreach($list->getItemlists() as $value) {
+                    if($value->getId() == $request->request->get('id')) {
+                        $value->inverseDone();
+                        $itemclient = $this->get('leo_and_leo_google.item_list_client');
+                        $itemclient->update($id, $value);
+                        break;
+                    }
+                }
+            }
+        }
+
         return $this->render('LeoAndLeoToDoListBundle:Google:listid.html.twig', array('list' => $list));
     }
 

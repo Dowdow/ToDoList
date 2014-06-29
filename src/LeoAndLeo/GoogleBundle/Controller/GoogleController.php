@@ -46,6 +46,7 @@ class GoogleController extends Controller
     public function disconnectAction() {
         $security = $this->get('security.context');
         $security->setToken(null);
+        $this->get('session')->invalidate();
 
         return $this->redirect($this->generateUrl('leo_and_leo_to_do_list.index'));
     }

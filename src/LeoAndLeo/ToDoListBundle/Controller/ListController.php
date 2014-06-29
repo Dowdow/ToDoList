@@ -27,6 +27,19 @@ class ListController extends Controller
             throw new NotFoundHttpException();
         }
 
+        $request = $this->get('request');
+        if($request->getMethod() == 'POST'){
+            if($request->request->get('done') && $request->request->get('id')) {
+                foreach($list->getItemlists() as $value) {
+                    if($value->getId() == $request->request->get('id')) {
+                        $value->inverseDone();
+                        break;
+                    }
+                }
+                $em->flush();
+            }
+        }
+
         return $this->render('LeoAndLeoToDoListBundle:Local:listid.html.twig', array('list' => $list));
     }
 

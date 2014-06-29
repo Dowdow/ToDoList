@@ -18,6 +18,14 @@ class ItemController extends Controller
             throw new NotFoundHttpException();
         }
 
+        $request = $this->get('request');
+        if($request->getMethod() == 'POST'){
+           if($request->request->get('done')) {
+               $item->inverseDone();
+               $em->flush();
+           }
+        }
+
         return $this->render('LeoAndLeoToDoListBundle:Local:itemid.html.twig', array('item' => $item));
     }
 

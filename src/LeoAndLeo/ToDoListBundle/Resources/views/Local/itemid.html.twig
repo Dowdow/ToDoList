@@ -17,7 +17,13 @@
             <div class="item-info">
                 <h4>Title : {{ item.title }}</h4>
                 <h4>Deadline : {{ item.deadline.date|date('d/m/Y') }}</h4>
-                <h4>Done : {{ item.done }}</h4>
+                <form method="post">
+                    {% if item.done %}
+                        <input type="submit" class="btn btn-success" name="done" value="Done !" />
+                    {% else %}
+                        <input type="submit" class="btn btn-default" name="done" value="Not done" />
+                    {% endif %}
+                </form>
                 <img src="{{ asset("public/img/nyan.png") }}" alt="image"/>
             </div>
             <div class="item-content">

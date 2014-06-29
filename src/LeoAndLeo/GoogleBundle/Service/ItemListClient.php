@@ -102,6 +102,9 @@ class ItemListClient {
         if($itemList->getDone()) {
             $task->setStatus('completed');
             $task->setCompleted($date);
+        } else {
+            $task->setStatus('needsAction');
+            $task->setCompleted($date);
         }
 
         $taskList = $this->service->tasks->update($taskListId, $itemList->getId(),$task);

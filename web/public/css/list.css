@@ -33,7 +33,7 @@
     overflow: hidden;
 }
 
-.item-info h4 {
+.item-info h4, .item-info form {
     position: relative;
     z-index: 1;
     padding-left: 1em;

@@ -28,7 +28,14 @@
                                 <img src="{{ asset('public/img/nyan.png') }}" alt="image"/>
                                 <figcaption>
                                     <h3><a href="{{ path('leo_and_leo_to_do_list.item_google_item_id', { 'id': list.id, 'idItem': item.id }) }}">{{ item.title }}</a></h3>
-                                    <p></p>
+                                    <form method="post">
+                                        {% if item.done %}
+                                            <input type="submit" class="btn btn-success" name="done" value="Done !" />
+                                        {% else %}
+                                            <input type="submit" class="btn btn-default" name="done" value="Not done" />
+                                        {% endif %}
+                                        <input type="hidden" name="id" value="{{ item.id }}" />
+                                    </form>
                                 </figcaption>
                             </figure>
                         </li>

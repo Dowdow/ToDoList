@@ -18,6 +18,14 @@ class ItemGoogleController extends Controller {
             throw new NotFoundHttpException();
         }
 
+        $request = $this->get('request');
+        if($request->getMethod() == 'POST'){
+            if($request->request->get('done')) {
+                $item->inverseDone();
+                $item = $client->update($id, $item);
+            }
+        }
+
         return $this->render('LeoAndLeoToDoListBundle:Google:itemid.html.twig', array('item' => $item));
     }
 
